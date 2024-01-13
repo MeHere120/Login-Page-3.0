@@ -1,22 +1,24 @@
-import React, { useState } from "react";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+// [meta] name: Login
+// [meta] description: make a login screen with username and password
+
+import { Alert } from "@/components/ui/alert";
+import { AlertDescription } from "@/components/ui/alert";
+import { AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Eye, EyeOff } from "lucide-react";
-import AccountCreation from "./AccountCreation";
+import { Eye } from "lucide-react";
+import { EyeOff } from "lucide-react";
+import { useState } from "react";
 
-const Login = () => {
+export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
+
   const [username, setUsername] = useState("");
+
   const [password, setPassword] = useState("");
-  const [showAccountCreation, setShowAccountCreation] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
-  };
-
-  const handleCreateAccountClick = () => {
-    setShowAccountCreation(true);
   };
 
   return (
@@ -33,7 +35,7 @@ const Login = () => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             placeholder="Username"
-            // ... (rest of the code for Input component)
+            className="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
           />
         </div>
 
@@ -45,7 +47,7 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
-              // ... (rest of the code for Input component)
+              className="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
             />
             <button
               type="button"
@@ -66,11 +68,10 @@ const Login = () => {
             Login
           </Button>
         </div>
-
         <div className="mt-6">
           <Button
             className="w-full rounded-md bg-blue-600 py-2 px-4 text-white hover:bg-blue-700 dark:hover:bg-blue-800"
-            onClick={handleCreateAccountClick}
+            href="/account-creation"
           >
             Create Account
           </Button>
@@ -82,11 +83,7 @@ const Login = () => {
             <AlertDescription>Contact support for assistance.</AlertDescription>
           </Alert>
         </div>
-
-        {showAccountCreation && <AccountCreation />}
       </div>
     </div>
   );
-};
-
-export default Login;
+}

@@ -1,115 +1,72 @@
 // [meta] name: AccountCreation
-// [meta] description: make a page where you input credentials to make an account. Specifically first and last name, username password and confirm password
+// [meta] description: make a page that has a search engine that lets your filter salary and position
 
-import { Alert } from "@/components/ui/alert";
-import { AlertDescription } from "@/components/ui/alert";
-import { AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { CardContent } from "@/components/ui/card";
+import { CardDescription } from "@/components/ui/card";
+import { CardFooter } from "@/components/ui/card";
+import { CardHeader } from "@/components/ui/card";
+import { CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Tooltip } from "@/components/ui/tooltip";
-import { TooltipContent } from "@/components/ui/tooltip";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { TooltipTrigger } from "@/components/ui/tooltip";
-import { Key } from "lucide-react";
-import { UserCircle } from "lucide-react";
+import { Slider } from "@/components/ui/slider";
+import { SearchCheck } from "lucide-react";
 import { useState } from "react";
 
 const AccountCreation = () => {
-  const [formState, setFormState] = useState({
-    firstName: "",
-    lastName: "",
-    username: "",
-    password: "",
-    confirmPassword: "",
-  });
+  const [salaryRange, setSalaryRange] = useState<[number, number]>([
+    50000, 150000,
+  ]);
 
-  const [passwordMatch, setPasswordMatch] = useState(true);
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormState({ ...formState, [name]: value });
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setPasswordMatch(formState.password === formState.confirmPassword);
-
-    if (formState.password === formState.confirmPassword) {
-      // Submit form logic
-      console.log("Account successfully created.");
-    } else {
-      console.log("Passwords do not match.");
-    }
-  };
+  // Placeholder data, replace with actual data fetching and rendering
+  const jobListings = [
+    {
+      title: "Software Engineer",
+      description: "A leading tech company",
+      salary: "$120,000",
+    },
+    {
+      title: "Product Manager",
+      description: "Innovative startup",
+      salary: "$130,000",
+    },
+    // More placeholder listings...
+  ];
 
   return (
-    <div className="bg-gradient-to-r from-green-400 to-purple-600 dark:from-gray-700 dark:to-gray-800 bg-decals p-8 rounded-lg shadow-xl w-full max-w-md mx-auto my-6">
-      <form onSubmit={handleSubmit}>
-        <div className="space-y-4">
-          <Input
-            type="text"
-            name="firstName"
-            placeholder="First Name"
-            value={formState.firstName}
-            onChange={handleInputChange}
-          />
-          <Input
-            type="text"
-            name="lastName"
-            placeholder="Last Name"
-            value={formState.lastName}
-            onChange={handleInputChange}
-          />
-          <Input
-            type="text"
-            name="username"
-            placeholder="Username"
-            value={formState.username}
-            onChange={handleInputChange}
-            icon={
-              <UserCircle className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-            }
-          />
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Input
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  value={formState.password}
-                  onChange={handleInputChange}
-                  icon={
-                    <Key className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-                  }
-                />
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Must be at least 8 characters</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-          <Input
-            type="password"
-            name="confirmPassword"
-            placeholder="Confirm Password"
-            value={formState.confirmPassword}
-            onChange={handleInputChange}
-          />
+    <div className="bg-white dark:bg-black p-8">
+      <div className="mb-8">
+        <Input placeholder="Position title" type="text" className="mb-4" />
+        <Slider
+          defaultValue={[50000, 150000]}
+          onValueChange={(value) => setSalaryRange(value as [number, number])}
+          min={0}
+          max={300000}
+          step={1000}
+        />
+        <div className="mt-2 text-right text-sm text-gray-600 dark:text-gray-400">
+          Salary range: ${salaryRange[0].toLocaleString()} - $
+          {salaryRange[1].toLocaleString()}
         </div>
-        {!passwordMatch && (
-          <Alert variant="destructive" className="mt-4">
-            <AlertTitle>Error</AlertTitle>
-            <AlertDescription>Passwords do not match.</AlertDescription>
-          </Alert>
-        )}
-        <Button
-          type="submit"
-          className="w-full mt-6 bg-purple-700 hover:bg-purple-800 text-white font-bold py-2 px-4 rounded"
-        >
-          Create Account
-        </Button>
-      </form>
+      </div>
+      <Button className="mb-8 flex items-center justify-center">
+        <SearchCheck className="mr-2 h-4 w-4" />
+        Search
+      </Button>
+      <div className="space-y-4">
+        {jobListings.map((job, index) => (
+          <Card key={index}>
+            <CardHeader>
+              <CardTitle>{job.title}</CardTitle>
+              <CardDescription>{job.description}</CardDescription>
+            </CardHeader>
+            <CardContent>Salary: {job.salary}</CardContent>
+            <CardFooter>
+              <Button variant="outline">View</Button>
+            </CardFooter>
+          </Card>
+        ))}
+      </div>
     </div>
   );
 };

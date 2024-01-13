@@ -28,6 +28,8 @@ export default function Login() {
           <Input
             id="username"
             type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             placeholder="Username"
             className="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
           />
@@ -38,6 +40,8 @@ export default function Login() {
             <Input
               id="password"
               type={showPassword ? "text" : "password"}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
               className="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
             />
@@ -58,6 +62,12 @@ export default function Login() {
         <div className="mt-6">
           <Button className="w-full rounded-md bg-indigo-600 py-2 px-4 text-white hover:bg-indigo-700 dark:hover:bg-indigo-800">
             Login
+          </Button>
+        </div>
+
+        <div className="mt-6">
+          <Button className="w-full rounded-md bg-blue-600 py-2 px-4 text-white hover:bg-blue-700 dark:hover:bg-blue-800">
+            Create Account
           </Button>
         </div>
 

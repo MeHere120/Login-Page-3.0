@@ -1,25 +1,22 @@
-// Login.tsx
 import React, { useState } from "react";
-import Link from 'next/link';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-<<<<<<< HEAD
-import { Eye } from "lucide-react";
-import { EyeOff } from "lucide-react";
-import { AccountCreation } from "@/components/AccountCreation";
-import { useState } from "react";
-=======
 import { Eye, EyeOff } from "lucide-react";
->>>>>>> ff4fe801a2e4dd15b030b9705fbe4bdf7887a55d
+import AccountCreation from "./AccountCreation";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showAccountCreation, setShowAccountCreation] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
+  };
+
+  const handleCreateAccountClick = () => {
+    setShowAccountCreation(true);
   };
 
   return (
@@ -36,7 +33,7 @@ const Login = () => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             placeholder="Username"
-            className="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+            // ... (rest of the code for Input component)
           />
         </div>
 
@@ -48,7 +45,7 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
-              className="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+              // ... (rest of the code for Input component)
             />
             <button
               type="button"
@@ -71,21 +68,12 @@ const Login = () => {
         </div>
 
         <div className="mt-6">
-<<<<<<< HEAD
-          <Button className="w-full rounded-md bg-blue-600 py-2 px-4 text-white hover:bg-blue-700 dark:hover:bg-blue-800">
+          <Button
+            className="w-full rounded-md bg-blue-600 py-2 px-4 text-white hover:bg-blue-700 dark:hover:bg-blue-800"
+            onClick={handleCreateAccountClick}
+          >
             Create Account
           </Button>
-=======
-          <Link href="/account-creation">
-            <a>
-              <Button
-                className="w-full rounded-md bg-blue-600 py-2 px-4 text-white hover:bg-blue-700 dark:hover:bg-blue-800"
-              >
-                Create Account
-              </Button>
-            </a>
-          </Link>
->>>>>>> ff4fe801a2e4dd15b030b9705fbe4bdf7887a55d
         </div>
 
         <div className="mt-4 flex justify-between">
@@ -94,6 +82,8 @@ const Login = () => {
             <AlertDescription>Contact support for assistance.</AlertDescription>
           </Alert>
         </div>
+
+        {showAccountCreation && <AccountCreation />}
       </div>
     </div>
   );

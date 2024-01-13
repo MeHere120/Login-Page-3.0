@@ -1,74 +1,133 @@
-// [meta] name: AccountCreation
-// [meta] description: make a page that has a search engine that lets your filter salary and position
+// [meta] name: AccountCreationPage
+// [meta] description: make a new page for account creation that includes username, email, password and password confirmation
 
+import { Alert } from "@/components/ui/alert";
+import { AlertDescription } from "@/components/ui/alert";
+import { AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { CardContent } from "@/components/ui/card";
-import { CardDescription } from "@/components/ui/card";
 import { CardFooter } from "@/components/ui/card";
-import { CardHeader } from "@/components/ui/card";
-import { CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Slider } from "@/components/ui/slider";
-import { SearchCheck } from "lucide-react";
+import { Shield } from "lucide-react";
 import { useState } from "react";
 
-const AccountCreation = () => {
-  const [salaryRange, setSalaryRange] = useState<[number, number]>([
-    50000, 150000,
-  ]);
+export default function AccountCreationPage() {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [formErrors, setFormErrors] = useState({});
 
-  // Placeholder data, replace with actual data fetching and rendering
-  const jobListings = [
-    {
-      title: "Software Engineer",
-      description: "A leading tech company",
-      salary: "$120,000",
-    },
-    {
-      title: "Product Manager",
-      description: "Innovative startup",
-      salary: "$130,000",
-    },
-    // More placeholder listings...
-  ];
+  const validateForm = () => {
+    const errors = {};
+    if (!username) errors.username = "Username is required.";
+    if (!email) errors.email = "Email is required.";
+    if (!password) errors.password = "Password is required.";
+    if (password !== confirmPassword)
+      errors.confirmPassword = "Passwords do not match.";
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (validateForm()) {
+      console.log("Form is valid, submit the data...");
+    }
+  };
 
   return (
-    <div className="bg-white dark:bg-black p-8">
-      <div className="mb-8">
-        <Input placeholder="Position title" type="text" className="mb-4" />
-        <Slider
-          defaultValue={[50000, 150000]}
-          onValueChange={(value) => setSalaryRange(value as [number, number])}
-          min={0}
-          max={300000}
-          step={1000}
-        />
-        <div className="mt-2 text-right text-sm text-gray-600 dark:text-gray-400">
-          Salary range: ${salaryRange[0].toLocaleString()} - $
-          {salaryRange[1].toLocaleString()}
-        </div>
-      </div>
-      <Button className="mb-8 flex items-center justify-center">
-        <SearchCheck className="mr-2 h-4 w-4" />
-        Search
-      </Button>
-      <div className="space-y-4">
-        {jobListings.map((job, index) => (
-          <Card key={index}>
-            <CardHeader>
-              <CardTitle>{job.title}</CardTitle>
-              <CardDescription>{job.description}</CardDescription>
-            </CardHeader>
-            <CardContent>Salary: {job.salary}</CardContent>
-            <CardFooter>
-              <Button variant="outline">View</Button>
-            </CardFooter>
-          </Card>
-        ))}
-      </div>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-8 flex justify-center items-center">
+      <Card className="w-full max-w-md space-y-8 rounded-lg shadow-xl ">
+        <form onSubmit={handleSubmit} className="space-y-8">
+          <h1 className="text-4xl font-bold text-center dark:text-white mb-6">
+            <span className="border-4 border-solid border-indigo-600 text-indigo-600 py-2 px-4">
+              Create Account
+            </span>
+          </h1>
+
+          {Object.keys(formErrors).length > 0 && (
+            <Alert variant="destructive">
+              <Shield className="h-4 w-4" />
+              <AlertTitle>Error</AlertTitle>
+              <AlertDescription>
+                Please address the following issues before submitting.
+              </AlertDescription>
+            </Alert>
+          )}
+
+          <div className="space-y-1">
+            <Input
+              type="text"
+              id="username"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className={formErrors.username ? "border-red-500" : ""}
+            />
+            {formErrors.username && (
+              <p className="text-red-500 text-sm">{formErrors.username}</p>
+            )}
+          </div>
+
+          <div className="space-y-1">
+            <Input
+              type="email"
+              id="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className={formErrors.email ? "border-red-500" : ""}
+            />
+            {formErrors.email && (
+              <p className="text-red-500 text-sm">{formErrors.email}</p>
+            )}
+          </div>
+
+          <div className="space-y-1">
+            <Input
+              type="password"
+              id="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className={formErrors.password ? "border-red-500" : ""}
+            />
+            {formErrors.password && (
+              <p className="text-red-500 text-sm">{formErrors.password}</p>
+            )}
+          </div>
+
+          <div className="space-y-1">
+            <Input
+              type="password"
+              id="confirmPassword"
+              placeholder="Confirm Password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              className={formErrors.confirmPassword ? "border-red-500" : ""}
+            />
+            {formErrors.confirmPassword && (
+              <p className="text-red-500 text-sm">
+                {formErrors.confirmPassword}
+              </p>
+            )}
+          </div>
+
+          <Button type="submit" className="w-full py-3 text-lg">
+            Sign Up
+          </Button>
+        </form>
+
+        <CardFooter>
+          <p className="text-sm text-center text-gray-600 dark:text-gray-400">
+            Already have an account?{" "}
+            <a href="/login" className="text-indigo-600 hover:underline">
+              Login
+            </a>
+          </p>
+        </CardFooter>
+      </Card>
     </div>
   );
-};
-
-export default AccountCreation;
+}

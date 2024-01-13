@@ -122,7 +122,7 @@ export default function AccountCreationPage() {
         <CardFooter>
           <p className="text-sm text-center text-gray-600 dark:text-gray-400">
             Already have an account?{" "}
-            <a href="/login" className="text-indigo-600 hover:underline">
+            <a href="/" className="text-indigo-600 hover:underline">
               Login
             </a>
           </p>

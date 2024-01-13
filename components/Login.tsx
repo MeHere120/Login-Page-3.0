@@ -1,21 +1,21 @@
-// [meta] name: Login
-// [meta] description: make a login screen with username and password
-
-import { Alert } from "@/components/ui/alert";
-import { AlertDescription } from "@/components/ui/alert";
-import { AlertTitle } from "@/components/ui/alert";
+// Login.tsx
+import React, { useState } from "react";
+import Link from 'next/link';
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+<<<<<<< HEAD
 import { Eye } from "lucide-react";
 import { EyeOff } from "lucide-react";
 import { AccountCreation } from "@/components/AccountCreation";
 import { useState } from "react";
+=======
+import { Eye, EyeOff } from "lucide-react";
+>>>>>>> ff4fe801a2e4dd15b030b9705fbe4bdf7887a55d
 
-export default function Login() {
+const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-
   const [username, setUsername] = useState("");
-
   const [password, setPassword] = useState("");
 
   const togglePasswordVisibility = () => {
@@ -69,10 +69,23 @@ export default function Login() {
             Login
           </Button>
         </div>
+
         <div className="mt-6">
+<<<<<<< HEAD
           <Button className="w-full rounded-md bg-blue-600 py-2 px-4 text-white hover:bg-blue-700 dark:hover:bg-blue-800">
             Create Account
           </Button>
+=======
+          <Link href="/account-creation">
+            <a>
+              <Button
+                className="w-full rounded-md bg-blue-600 py-2 px-4 text-white hover:bg-blue-700 dark:hover:bg-blue-800"
+              >
+                Create Account
+              </Button>
+            </a>
+          </Link>
+>>>>>>> ff4fe801a2e4dd15b030b9705fbe4bdf7887a55d
         </div>
 
         <div className="mt-4 flex justify-between">
@@ -84,4 +97,6 @@ export default function Login() {
       </div>
     </div>
   );
-}
+};
+
+export default Login;

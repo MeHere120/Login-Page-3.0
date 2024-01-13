@@ -13,6 +13,8 @@ import { useState } from "react";
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
 
+  const [username, setUsername] = useState('');
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };

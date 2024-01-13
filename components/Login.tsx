@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Eye } from "lucide-react";
 import { EyeOff } from "lucide-react";
+import { AccountCreation } from "@/components/AccountCreation";
 import { useState } from "react";
 
 export default function Login() {
@@ -69,7 +70,7 @@ export default function Login() {
           </Button>
         </div>
         <div className="mt-6">
-          <Button className="w-full rounded-md bg-blue-600 py-2 px-4 text-white hover:bg-blue-700 dark:hover:bg-blue-800">
+          <Button className="w-full rounded-md bg-blue-600 py-2 px-4 text-white hover:bg-blue-700 dark:hover:bg-blue-800" onClick={() => return <AccountCreation /> }>
             Create Account
           </Button>
         </div>
@@ -81,6 +82,5 @@ export default function Login() {
           </Alert>
         </div>
       </div>
-    </div>
-  );
+    </div>  );
 }

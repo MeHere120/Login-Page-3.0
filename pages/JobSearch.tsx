@@ -17,9 +17,13 @@ const UpdatedMultiSelectSearchDropdown = () => {
   const [accessibilityQuery, setAccessibilityQuery] = useState("");
 
   return (
-    <div className="flex flex-col items-center w-full max-w-2xl mx-auto my-8 bg-white dark:bg-black rounded-xl shadow-2xl">
+    <div className="flex flex-col items-center w-full max-w-2xl mx-auto mb-8 bg-white dark:bg-black rounded-xl shadow-2xl">
       <div className="p-8 w-full">
         <div className="mb-6">
+          <div className="bg-blue-500 dark:bg-blue-700 text-white p-4 rounded-lg mb-4">
+            <h2 className="text-lg font-semibold">User Profile</h2>
+            <p>Username: JohnDoe</p>
+          </div>
           <div className="flex items-center bg-gray-100 dark:bg-gray-800 rounded-lg p-2">
             <Input
               type="text"
@@ -36,14 +40,13 @@ const UpdatedMultiSelectSearchDropdown = () => {
           <div className="flex items-center bg-gray-100 dark:bg-gray-800 rounded-lg p-2">
             <Input
               type="text"
-              placeholder="Accessible Search..."
+              placeholder="Accessibility Options"
               className="flex-grow bg-transparent border-none p-3 rounded-lg focus:ring-0 text-gray-800 dark:text-gray-300"
               value={accessibilityQuery}
               onChange={(e) => setAccessibilityQuery(e.target.value)}
             />
           </div>
         </div>
-
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-x-4 gap-y-6">
           <Select className="bg-gray-100 dark:bg-gray-800 rounded-lg">
             <SelectTrigger className="flex justify-between items-center w-full p-3 rounded-lg bg-transparent border-none">
@@ -215,33 +218,49 @@ const UpdatedMultiSelectSearchDropdown = () => {
             <SelectContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-600 rounded-lg shadow-lg">
               <SelectItem
                 className="p-3 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg"
-                value="Entry"
+                value="Internship"
               >
-                Entry
+                Internship
               </SelectItem>
               <SelectItem
                 className="p-3 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg"
-                value="Mid"
+                value="Entry Level"
               >
-                Mid
+                Entry Level
               </SelectItem>
               <SelectItem
                 className="p-3 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg"
-                value="Senior"
+                value="Associate Level"
               >
-                Senior
+                Associate Level
               </SelectItem>
               <SelectItem
                 className="p-3 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg"
-                value="Lead"
+                value="Mid-Senior Level"
               >
-                Lead
+                Mid-Senior Level
+              </SelectItem>
+              <SelectItem
+                className="p-3 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg"
+                value="Director"
+              >
+                Director
+              </SelectItem>
+              <SelectItem
+                className="p-3 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg"
+                value="Executive"
+              >
+                Executive
               </SelectItem>
             </SelectContent>
           </Select>
         </div>
       </div>
     </div>
+  );
+};
+
+export default UpdatedMultiSelectSearchDropdown;
   );
 };
 

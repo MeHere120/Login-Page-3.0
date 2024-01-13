@@ -71,7 +71,7 @@ export default function Login() {
         <div className="mt-6">
           <Button
             className="w-full rounded-md bg-blue-600 py-2 px-4 text-white hover:bg-blue-700 dark:hover:bg-blue-800"
-            href="/account-creation"
+            onClick={() => (window.location.href = "/account-creation")}
           >
             Create Account
           </Button>

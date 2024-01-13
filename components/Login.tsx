@@ -13,9 +13,9 @@ import { useState } from "react";
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
 
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState("");
 
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState("");
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -70,7 +70,10 @@ export default function Login() {
         </div>
 
         <div className="mt-6">
-          <Button className="w-full rounded-md bg-blue-600 py-2 px-4 text-white hover:bg-blue-700 dark:hover:bg-blue-800">
+          <Button
+            className="w-full rounded-md bg-blue-600 py-2 px-4 text-white hover:bg-blue-700 dark:hover:bg-blue-800"
+            onClick={() => setOpenComponent("AccountCreation")}
+          >
             Create Account
           </Button>
         </div>

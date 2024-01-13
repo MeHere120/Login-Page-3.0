@@ -73,7 +73,7 @@ export default function Login() {
             className="w-full rounded-md bg-blue-600 py-2 px-4 text-white hover:bg-blue-700 dark:hover:bg-blue-800"
             onClick={() => {
               /* Navigation to create account component implemented */
-              window.location.href = "/AccountCreation";
+              // TODO: Implement component opening logic here
             }}
           >
             Create Account
